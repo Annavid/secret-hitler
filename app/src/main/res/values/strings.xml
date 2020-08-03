@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Secret Hitler Online</string>
+    <string name="create_button">Create New Game</string>
+    <string name="join_button">Join Game</string>
+    <string name="exit_button">Exit</string>
+    <string name="username_field">Username</string>
+    <string name="password_field">Password</string>
+    <string name="login_button">Login</string>
+    <string name="register_button">Register</string>
+    <string name="localhost">http://891c515798e4.ngrok.io/</string>
+    <string name="loginError">login failed</string>
+    <string name="RegisterError">register failed</string>
+    <string name="number_of_players_hint">Enter number of players</string>
+    <string name="players_warning">* Number of Players Should be at Least 5 and Maximum 10</string>
+</resources>
