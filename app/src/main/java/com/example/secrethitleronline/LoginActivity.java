@@ -1,5 +1,6 @@
 package com.example.secrethitleronline;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,27 +46,6 @@ public class LoginActivity extends AppCompatActivity {
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                    //RequestQueue initialized
-//                RequestQueue mRequestQueue = Volley.newRequestQueue(getApplicationContext());
-//
-//                    //String Request initialized
-//                StringRequest mStringRequest = new StringRequest(Request.Method.GET, "https://jsonplaceholder.typicode.com/todos/", new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//
-//                        Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
-//
-//                    }
-//                }, new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//
-//                        Log.e( "Error :" , error.toString());
-//                    }
-//                });
-//
-//                    mRequestQueue.add(mStringRequest);
                 
                 
                 if (isEmpty(username))
@@ -74,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                     password.setError("Password is empty");
                 else {
                     try {
-                        sendRegisterRequest();
+                        sendLoginRequest();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -92,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                 else
                 {
                     try {
-                        sendLoginRequest();
+                        sendRegisterRequest();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -106,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void sendRegisterRequest() throws IOException {
-        sendRequest(NetTools.getRegisterURL(), username.getText().toString(), password.getText().toString(), true);
+        sendRequest(getResources().getString(R.string.localhost) + NetTools.getRegisterURL(), username.getText().toString(), password.getText().toString(), true);
     }
 
     private void showLoginError() {
@@ -114,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void sendLoginRequest() throws IOException {
-        sendRequest(NetTools.getLoginURL(), username.getText().toString(), password.getText().toString(), false);
+        sendRequest(getResources().getString(R.string.localhost) + NetTools.getLoginURL(), username.getText().toString(), password.getText().toString(), false);
     }
 
     public void nextActivity(){
@@ -154,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
                                     if (!response.equals(usernameText))
                                         showRegisterError();
                                     else
-                                        sendRequest(url, usernameText, passwordText, false);
+                                        sendRequest(NetTools.getLoginURL(), usernameText, passwordText, false);
                                 }
                                 else {
                                     response = jsonObject.getString("token");
@@ -164,13 +144,19 @@ public class LoginActivity extends AppCompatActivity {
                                         showLoginError();
                                 }
                             } catch (JSONException | IOException e) {
-                                e.printStackTrace();
+                                if (state)
+                                    showRegisterError();
+                                else
+                                    showLoginError();
                             }}
                     }, new Response.ErrorListener() {
 
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.e("Error: ", Objects.requireNonNull(error.getMessage()));
+                    if (state)
+                        showRegisterError();
+                    else
+                        showLoginError();
                 }
             });
 
@@ -180,7 +166,10 @@ public class LoginActivity extends AppCompatActivity {
 
             requestQueue.add(myRequest);
         } catch (JSONException e) {
-            e.printStackTrace();
+            if (state)
+                showRegisterError();
+            else
+                showLoginError();
         }
     }
 

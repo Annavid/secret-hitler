@@ -20,13 +20,19 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
+import static androidx.core.graphics.drawable.IconCompat.getResources;
+
 class NetTools {
 
     static String getLoginURL() {
-        return "http://139c03950db5.ngrok.io/api/v1/users/obtain-token/";
+        return "/api/v1/users/obtain-token/";
     }
 
     static String getRegisterURL() {
-        return "http://139c03950db5.ngrok.io/api/v1/users/create/";
+        return "/api/v1/users/create/";
+    }
+
+    static String getCreateGameURL() {
+        return "/api/v1/game/create/";
     }
 }

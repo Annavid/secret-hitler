@@ -7,11 +7,26 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class CreateGame extends AppCompatActivity {
 
     Button createButton;
     EditText playerCount;
+    String joinURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +35,7 @@ public class CreateGame extends AppCompatActivity {
         setContentView(R.layout.activity_create_game);
         createButton = findViewById(R.id.button6);
         playerCount = findViewById(R.id.editText);
+        final RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,10 +44,47 @@ public class CreateGame extends AppCompatActivity {
                 if (count < 5 || count > 10)
                     playerCount.setError("invalid input");
                 else {
-                    //TODO: create game
+
+                    JSONObject jsonBody = new JSONObject();
+                    try {
+                        jsonBody.put("player_count", playerCount.getText().toString());
+                    } catch (JSONException e) {
+                        playerCount.setError("invalid input");
+                    }
+
+                    JsonObjectRequest myRequest = new JsonObjectRequest(Request.Method.POST,
+                            getResources().getString(R.string.localhost) + NetTools.getCreateGameURL(), jsonBody,
+                            new Response.Listener<JSONObject>() {
+
+                                @Override
+                                public void onResponse(JSONObject jsonObject) {
+                                    try {
+                                        joinURL = jsonObject.getString("join_url");
+                                    } catch (JSONException e) {
+                                        showError();
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            showError();
+                        }
+                    });
+
+                    myRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+                    requestQueue.add(myRequest);
+
                 }
             }
         });
 
+    }
+
+    private void showError() {
+        Toast.makeText(this, getResources().getString(R.string.create_game_error), Toast.LENGTH_LONG).show();
     }
 }
