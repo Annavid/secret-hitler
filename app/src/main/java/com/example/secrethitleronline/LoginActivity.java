@@ -134,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
                                     if (!response.equals(usernameText))
                                         showRegisterError();
                                     else
-                                        sendRequest(NetTools.getLoginURL(), usernameText, passwordText, false);
+                                        sendRequest(getResources().getString(R.string.localhost) + NetTools.getLoginURL(), usernameText, passwordText, false);
                                 }
                                 else {
                                     response = jsonObject.getString("token");
