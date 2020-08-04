@@ -1,5 +1,6 @@
 package com.example.secrethitleronline;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -64,6 +65,7 @@ public class CreateGame extends AppCompatActivity {
                                 public void onResponse(JSONObject jsonObject) {
                                     try {
                                         joinURL = jsonObject.getString("join_url");
+                                        startGame(joinURL);
                                     } catch (JSONException e) {
                                         showError();
                                     }
@@ -102,4 +104,13 @@ public class CreateGame extends AppCompatActivity {
     private void showError() {
         Toast.makeText(this, getResources().getString(R.string.create_game_error), Toast.LENGTH_LONG).show();
     }
+
+    private void startGame(String uri) {
+        Intent intent = new Intent(this, GamePlay.class);
+        intent.putExtra("uri", uri);
+        intent.putExtra("token", token);
+        startActivity(intent);
+        finish();
+    }
+
 }

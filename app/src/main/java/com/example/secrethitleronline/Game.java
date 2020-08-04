@@ -16,7 +16,7 @@ public class Game {
         this.join_url = join_url;
     }
 
-    public String getPlayers_to_start ()
+    String getPlayers_to_start()
     {
         return players_to_start;
     }

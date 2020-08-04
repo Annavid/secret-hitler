@@ -1,26 +1,26 @@
 package com.example.secrethitleronline;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
 
+import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class JoinGame extends AppCompatActivity {
 
@@ -35,19 +35,33 @@ public class JoinGame extends AppCompatActivity {
         token = getIntent().getStringExtra("token");
         String json = getIntent().getStringExtra("game_list");
         ObjectMapper mapper = new ObjectMapper();
-        assert json != null;
+//        assert json != null;
+//        try {
+//            games = mapper.readValue(json, new TypeReference<ArrayList<Game>>() {
+//                @Override
+//                public Type getType() {
+//                    return super.getType();
+//                }
+//            });
+//        } catch (JsonProcessingException e) {
+//            showJoinError();
+//        }
+
         try {
-            games = mapper.readValue(json, new TypeReference<ArrayList<Game>>() {
-                @Override
-                public Type getType() {
-                    return super.getType();
-                }
-            });
-        } catch (JsonProcessingException e) {
+            JSONArray array = new JSONArray(json);
+            for (int i=0;i< array.length();i++){
+                games.add((mapper.readValue(array.get(i).toString(), Game.class)));
+            }
+        } catch (JSONException e) {
             showJoinError();
+        } catch (JsonMappingException ignored) {
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
 
-        ArrayList<String> urls = new ArrayList<>();
+
+        final ArrayList<String> urls = new ArrayList<>();
         ArrayList<String> counts = new ArrayList<>();
         for (Game game: games) {
             urls.add(game.getJoin_url());
@@ -63,10 +77,18 @@ public class JoinGame extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                //TODO: send web socket request with urls[positon]
+                startGame(urls.get(position));
             }
         });
 
+    }
+
+    private void startGame(String uri) {
+        Intent intent = new Intent(this, GamePlay.class);
+        intent.putExtra("uri", uri);
+        intent.putExtra("token", token);
+        startActivity(intent);
+        finish();
     }
 
     private void showJoinError() {

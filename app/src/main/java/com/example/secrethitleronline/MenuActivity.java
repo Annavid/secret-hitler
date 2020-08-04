@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -18,15 +19,20 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonArray;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -101,21 +107,33 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                JsonObjectRequest myRequest = new JsonObjectRequest(Request.Method.GET,
+                JsonArrayRequest myRequest = new JsonArrayRequest(Request.Method.GET,
                         getResources().getString(R.string.localhost) + NetTools.getAvailableGamesList(), null,
-                        new Response.Listener<JSONObject>() {
+                        new Response.Listener<JSONArray>() {
 
                             @Override
-                            public void onResponse(JSONObject jsonObject) {
+                            public void onResponse(JSONArray jsonObject) {
                                 JoinGameActivity(jsonObject);
+                                showResponse(jsonObject.toString());
                             }
                         }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         showJoinError();
+                        Log.d("errorws:", error.toString());
                     }
-                });
+                })
+
+                {
+                    @Override
+                    public Map<String, String> getHeaders() {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("Authorization", "Token " + token);
+                        return params;
+                    }
+                };
+
 
                 myRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
                         DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -127,14 +145,18 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
+    private void showResponse(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
+    }
+
     private void showJoinError() {
         Toast.makeText(this, "Something went wrong!", Toast.LENGTH_LONG).show();
     }
 
-    private void JoinGameActivity(JSONObject jsonObject) {
+    private void JoinGameActivity(JSONArray jsonObject) {
         Intent intent = new Intent(this, JoinGame.class);
         intent.putExtra("token", token);
-        intent.putExtra("game_list", jsonObject.toString());
+        intent.putExtra("game_list",  jsonObject.toString());
         startActivity(intent);
     }
 
