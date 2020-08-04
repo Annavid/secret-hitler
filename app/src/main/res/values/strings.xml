@@ -12,5 +12,7 @@
     <string name="RegisterError">register failed</string>
     <string name="number_of_players_hint">Enter number of players</string>
     <string name="players_warning">* Number of Players Should be at Least 5 and Maximum 10</string>
-    <string name="create_game_error">\"failed\"</string>
+    <string name="create_game_error">failed</string>
+    <string name="join_url">Join URL: </string>
+    <string name="players_to_go">Players to Start: </string>
 </resources>

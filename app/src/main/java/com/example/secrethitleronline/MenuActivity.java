@@ -10,12 +10,15 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -70,6 +73,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private void primarySettings() {
 
+        final RequestQueue requestQueue = Volley.newRequestQueue(this);
         create_game = findViewById(R.id.button);
         join_game = findViewById(R.id.button2);
         exit = findViewById(R.id.button3);
@@ -96,14 +100,41 @@ public class MenuActivity extends AppCompatActivity {
         join_game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JoinGameActivity();
+
+                JsonObjectRequest myRequest = new JsonObjectRequest(Request.Method.GET,
+                        getResources().getString(R.string.localhost) + NetTools.getAvailableGamesList(), null,
+                        new Response.Listener<JSONObject>() {
+
+                            @Override
+                            public void onResponse(JSONObject jsonObject) {
+                                JoinGameActivity(jsonObject);
+                            }
+                        }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        showJoinError();
+                    }
+                });
+
+                myRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+                requestQueue.add(myRequest);
+
             }
         });
     }
 
-    private void JoinGameActivity() {
+    private void showJoinError() {
+        Toast.makeText(this, "Something went wrong!", Toast.LENGTH_LONG).show();
+    }
+
+    private void JoinGameActivity(JSONObject jsonObject) {
         Intent intent = new Intent(this, JoinGame.class);
         intent.putExtra("token", token);
+        intent.putExtra("game_list", jsonObject.toString());
         startActivity(intent);
     }
 

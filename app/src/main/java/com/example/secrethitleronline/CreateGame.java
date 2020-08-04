@@ -1,13 +1,13 @@
 package com.example.secrethitleronline;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -20,19 +20,23 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class CreateGame extends AppCompatActivity {
 
     Button createButton;
     EditText playerCount;
     String joinURL;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_create_game);
+        token = getIntent().getStringExtra("token");
         createButton = findViewById(R.id.button6);
         playerCount = findViewById(R.id.editText);
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -70,7 +74,18 @@ public class CreateGame extends AppCompatActivity {
                         public void onErrorResponse(VolleyError error) {
                             showError();
                         }
-                    });
+
+
+                    })
+
+                    {
+                        @Override
+                        public Map<String, String> getHeaders() {
+                            Map<String, String> params = new HashMap<>();
+                            params.put("Authorization", "Token " + token);
+                            return params;
+                        }
+                    };
 
                     myRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
                             DefaultRetryPolicy.DEFAULT_MAX_RETRIES,

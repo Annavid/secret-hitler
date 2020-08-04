@@ -35,4 +35,6 @@ class NetTools {
     static String getCreateGameURL() {
         return "/api/v1/game/create/";
     }
+
+    static String getAvailableGamesList() { return "/api/v1/game/list/"; }
 }
