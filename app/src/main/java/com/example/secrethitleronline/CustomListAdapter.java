@@ -2,14 +2,12 @@ package com.example.secrethitleronline;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
@@ -26,15 +24,34 @@ public class CustomListAdapter extends ArrayAdapter {
         this.infoArray = infoArray;
     }
 
+    @Override
+    public int getCount() {
+        // TODO Auto-generated method stub
+        return nameArray.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        // TODO Auto-generated method stub
+        return nameArray.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        // TODO Auto-generated method stub
+        return position;
+    }
+
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        @SuppressLint({"ViewHolder", "InflateParams"}) View rowView = inflater.inflate(R.layout.list_row_layout, null,true);
+        @SuppressLint({"ViewHolder", "InflateParams"}) View rowView = inflater.inflate(R.layout.list_row_layout, null,false);
 
         TextView nameTextField = rowView.findViewById(R.id.textView3);
         TextView infoTextField = rowView.findViewById(R.id.textView2);
 
         nameTextField.setText(getString(nameTextField.getText().toString(), nameArray.get(position)));
         infoTextField.setText(getString(infoTextField.getText().toString(), infoArray.get(position)));
+        Log.e("textview:", nameArray.get(position));
 
         return rowView;
 

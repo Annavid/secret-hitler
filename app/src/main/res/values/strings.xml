@@ -7,7 +7,7 @@
     <string name="password_field">Password</string>
     <string name="login_button">Login</string>
     <string name="register_button">Register</string>
-    <string name="localhost">http://82f4174336e1.ngrok.io</string>
+    <string name="localhost">http://8d5a93a6e59c.ngrok.io</string>
     <string name="loginError">login failed</string>
     <string name="RegisterError">register failed</string>
     <string name="number_of_players_hint">Enter number of players</string>
@@ -15,5 +15,5 @@
     <string name="create_game_error">failed</string>
     <string name="join_url">Join URL: </string>
     <string name="players_to_go">Players to Start: </string>
-    <string name="ws_host">ws://82f4174336e1.ngrok.io</string>
+    <string name="ws_host">ws://8d5a93a6e59c.ngrok.io</string>
 </resources>
