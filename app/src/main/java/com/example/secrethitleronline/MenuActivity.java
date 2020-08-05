@@ -40,7 +40,7 @@ public class MenuActivity extends AppCompatActivity {
     Button join_game;
     Button exit;
     ImageView sound_button;
-    MediaPlayer music = new MediaPlayer();
+    static MediaPlayer music = new MediaPlayer();
     boolean music_sound = true;
     int length;
     String token;
@@ -164,6 +164,10 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CreateGame.class);
         intent.putExtra("token", token);
         startActivity(intent);
+    }
+
+    public static MediaPlayer getMusic(){
+        return music;
     }
 
 }

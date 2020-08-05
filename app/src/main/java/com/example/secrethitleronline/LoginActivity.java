@@ -1,9 +1,7 @@
 package com.example.secrethitleronline;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -18,15 +16,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -34,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     Button register_button;
     EditText username;
     EditText password;
+    static String user;
     String response;
 
     @Override
@@ -99,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void nextActivity(){
         Intent intent = new Intent(this, MenuActivity.class);
+        user = username.getText().toString();
         intent.putExtra("token", response);
         startActivity(intent);
         finish();
@@ -171,6 +168,10 @@ public class LoginActivity extends AppCompatActivity {
             else
                 showLoginError();
         }
+    }
+
+    public static String getUser(){
+        return user;
     }
 
 }
