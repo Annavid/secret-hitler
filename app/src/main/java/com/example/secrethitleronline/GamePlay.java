@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -17,6 +20,8 @@ public class GamePlay extends AppCompatActivity {
 
     private WebSocketClient mWebSocketClient;
     String token;
+    ProgressBar progressBar;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,14 @@ public class GamePlay extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         token = getIntent().getStringExtra("token");
         connectWebSocket();
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+        textView = findViewById(R.id.textView4);
+    }
+
+    private void callThisMethodWhenAllPlayersJoined() {
+        //TODO: call when all joined
+        setContentView(R.layout.main_game_board);
     }
 
     private void connectWebSocket() {

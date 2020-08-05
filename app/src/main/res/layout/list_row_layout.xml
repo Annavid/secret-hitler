@@ -2,19 +2,21 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll"
-    android:layout_width="400dp"
-    android:layout_height="50dp"
+    android:layout_width="450dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/join_url" />
+        android:text="@string/join_url"
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/players_to_go" />
+        android:text="@string/players_to_go"
+        android:textSize="18sp" />
 </LinearLayout>

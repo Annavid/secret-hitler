@@ -16,4 +16,10 @@
     <string name="join_url">Join URL: </string>
     <string name="players_to_go">Players to Start: </string>
     <string name="ws_host">ws://8d5a93a6e59c.ngrok.io</string>
+    <string name="wait_text">Waiting for Other Players to Join…</string>
+    <string name="draw_pile">Draw:</string>
+    <string name="discard_pile">Discard:</string>
+    <string name="president">President:</string>
+    <string name="chanc">Chancellor:</string>
+    <string name="election_tracker">Election Tracker:</string>
 </resources>

@@ -2,7 +2,6 @@ package com.example.secrethitleronline;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -12,15 +11,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class JoinGame extends AppCompatActivity {
@@ -36,17 +32,6 @@ public class JoinGame extends AppCompatActivity {
         token = getIntent().getStringExtra("token");
         String json = getIntent().getStringExtra("game_list");
         ObjectMapper mapper = new ObjectMapper();
-//        assert json != null;
-//        try {
-//            games = mapper.readValue(json, new TypeReference<ArrayList<Game>>() {
-//                @Override
-//                public Type getType() {
-//                    return super.getType();
-//                }
-//            });
-//        } catch (JsonProcessingException e) {
-//            showJoinError();
-//        }
 
         try {
             JSONArray array = new JSONArray(json);
