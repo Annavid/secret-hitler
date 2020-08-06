@@ -45,6 +45,8 @@ public class MenuActivity extends AppCompatActivity {
     int length;
     String token;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -56,6 +58,7 @@ public class MenuActivity extends AppCompatActivity {
         primarySettings();
         musicHandler();
     }
+
 
     private void musicHandler() {
         sound_button.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +117,7 @@ public class MenuActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONArray jsonObject) {
                                 JoinGameActivity(jsonObject);
-                                showResponse(jsonObject.toString());
+                                //showResponse(jsonObject.toString());
                             }
                         }, new Response.ErrorListener() {
 

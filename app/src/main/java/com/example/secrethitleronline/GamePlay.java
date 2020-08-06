@@ -66,7 +66,7 @@ public class GamePlay extends AppCompatActivity {
     private void connectWebSocket() {
         URI uri;
         try {
-            uri = new URI(getResources().getString(R.string.ws_host) + NetTools.getWebSocketFirstAddress() + getIntent().getStringExtra("uri") + "/");
+            uri = new URI(getResources().getString(R.string.ws_host) + NetTools.getWebSocketFirstAddress() + getIntent().getStringExtra("uri"));
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return;
@@ -123,14 +123,16 @@ public class GamePlay extends AppCompatActivity {
                 break;
             case "president":
                 president.setText(jsonObject.getString("username"));
+                gameInstructor.setText(getResources().getString(R.string.pick_chancellor));
                 break;
             case "role":
                 handleRoles(jsonObject);
+                break;
         }
     }
 
     private void handleRoles(JSONObject jsonObject) throws JSONException {
-        if (jsonObject.getString("role").equals("liberal")){
+        if (jsonObject.getString("role").equals("l")){
             for (int i=0; i<users.size(); i++){
                 if (username.equals(users.get(i))){
                     usernames.get(i).setTextColor(Color.parseColor("#76d2e1"));
@@ -138,25 +140,35 @@ public class GamePlay extends AppCompatActivity {
 
             }
         }
-        if (jsonObject.getString("role").equals("fascist")){
+        if (jsonObject.getString("role").equals("f")){
             for (int i=0; i<users.size(); i++){
-                if (username.equals(users.get(i)) || jsonObject.getString("yar").equals(users.get(i))){
+                if (username.equals(users.get(i))){
                     usernames.get(i).setTextColor(Color.parseColor("#e9954f"));
-                    if (jsonObject.getString("secret").equals("hitler"))
-                        roles.get(i).setImageResource(R.drawable.hitty_role);
-                    else
-                        roles.get(i).setImageResource(R.drawable.fasc_role);
+                    roles.get(i).setImageResource(R.drawable.fasc_role);
                 }
+                if (jsonObject.getString("yar").equals(users.get(i)))
+                    roles.get(i).setImageResource(R.drawable.hitty_role);
+            }
+        }
+        if (jsonObject.getString("role").equals("h")){
+            for (int i=0; i<users.size(); i++){
+                if (username.equals(users.get(i))){
+                    usernames.get(i).setTextColor(Color.parseColor("#e9954f"));
+                    roles.get(i).setImageResource(R.drawable.hitty_role);
+                }
+                if (jsonObject.getString("yar").equals(users.get(i)))
+                    roles.get(i).setImageResource(R.drawable.fasc_role);
             }
         }
     }
 
     private void gameInitiation(JSONObject jsonObject) throws JSONException {
-        JSONArray jsonArray = jsonObject.getJSONArray("username");
+        JSONArray jsonArray = new JSONArray(jsonObject.getString("players"));
         initialSettings();
         for (int i=0;i< jsonArray.length();i++){
-            users.add(jsonArray.get(i).toString());
-            usernames.get(i).setText(jsonArray.get(i).toString());
+            JSONObject jsonObject1 = new JSONObject(jsonArray.get(i).toString());
+            users.add(jsonObject1.getString("username"));
+            usernames.get(i).setText(jsonObject1.getString("username"));
         }
 
     }

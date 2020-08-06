@@ -12,8 +12,8 @@
         android:layout_height="118dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.919"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.579"
+        app:layout_constraintStart_toEndOf="@+id/imageView11"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.054"
         app:srcCompat="@drawable/default_policy" />
@@ -50,8 +50,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.023"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.886"
+        app:layout_constraintTop_toBottomOf="@+id/boardFasc"
+        app:layout_constraintVertical_bias="0.195"
         app:srcCompat="@drawable/default_role" />
 
     <ImageView
@@ -60,10 +60,10 @@
         android:layout_height="86dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.886"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintStart_toEndOf="@+id/player1"
+        app:layout_constraintTop_toBottomOf="@+id/boardFasc"
+        app:layout_constraintVertical_bias="0.195"
         app:srcCompat="@drawable/default_role" />
 
     <ImageView
@@ -72,10 +72,10 @@
         android:layout_height="86dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.232"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.886"
+        app:layout_constraintHorizontal_bias="0.019"
+        app:layout_constraintStart_toEndOf="@+id/player2"
+        app:layout_constraintTop_toBottomOf="@+id/boardFasc"
+        app:layout_constraintVertical_bias="0.195"
         app:srcCompat="@drawable/default_role" />
 
     <ImageView
@@ -84,10 +84,10 @@
         android:layout_height="86dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.886"
+        app:layout_constraintHorizontal_bias="0.019"
+        app:layout_constraintStart_toEndOf="@+id/player3"
+        app:layout_constraintTop_toBottomOf="@+id/boardFasc"
+        app:layout_constraintVertical_bias="0.217"
         app:srcCompat="@drawable/default_role" />
 
     <ImageView
@@ -96,66 +96,71 @@
         android:layout_height="86dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.438"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.886"
+        app:layout_constraintHorizontal_bias="0.028"
+        app:layout_constraintStart_toEndOf="@+id/player4"
+        app:layout_constraintTop_toBottomOf="@+id/boardFasc"
+        app:layout_constraintVertical_bias="0.195"
         app:srcCompat="@drawable/default_role" />
 
     <TextView
         android:id="@+id/user1"
         android:layout_width="59dp"
         android:layout_height="20dp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.023"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.959" />
+        app:layout_constraintTop_toTopOf="@+id/player1"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/user2"
         android:layout_width="59dp"
         android:layout_height="20dp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.129"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.959" />
+        app:layout_constraintHorizontal_bias="0.018"
+        app:layout_constraintStart_toEndOf="@+id/user1"
+        app:layout_constraintTop_toTopOf="@+id/player2"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/user3"
         android:layout_width="59dp"
         android:layout_height="20dp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.232"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.959" />
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintStart_toEndOf="@+id/user2"
+        app:layout_constraintTop_toTopOf="@+id/player3"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/user4"
         android:layout_width="59dp"
         android:layout_height="20dp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.959" />
+        app:layout_constraintHorizontal_bias="0.019"
+        app:layout_constraintStart_toEndOf="@+id/user3"
+        app:layout_constraintTop_toTopOf="@+id/player4"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/user5"
         android:layout_width="59dp"
         android:layout_height="20dp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.959" />
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toEndOf="@+id/user4"
+        app:layout_constraintTop_toTopOf="@+id/player5"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView11"
@@ -163,8 +168,8 @@
         android:layout_height="118dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.697"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.284"
+        app:layout_constraintStart_toEndOf="@+id/boardLib"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.054"
         app:srcCompat="@drawable/default_policy" />
@@ -173,49 +178,51 @@
         android:id="@+id/drawPile"
         android:layout_width="73dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
         android:text="@string/draw_pile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.697"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.359" />
+        app:layout_constraintHorizontal_bias="0.284"
+        app:layout_constraintStart_toEndOf="@+id/boardLib"
+        app:layout_constraintTop_toBottomOf="@+id/imageView11"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/discardPile"
-        android:layout_width="73dp"
-        android:layout_height="wrap_content"
+        android:layout_width="74dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="7dp"
         android:text="@string/discard_pile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.919"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.359" />
+        app:layout_constraintHorizontal_bias="0.584"
+        app:layout_constraintStart_toEndOf="@+id/drawPile"
+        app:layout_constraintTop_toBottomOf="@+id/imageView12"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/president"
-        android:layout_width="280dp"
+        android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:text="@string/president"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.904"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.443" />
+        app:layout_constraintHorizontal_bias="0.386"
+        app:layout_constraintStart_toEndOf="@+id/boardFasc"
+        app:layout_constraintTop_toBottomOf="@+id/drawPile"
+        app:layout_constraintVertical_bias="0.039" />
 
     <TextView
         android:id="@+id/chanc"
-        android:layout_width="280dp"
+        android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:text="@string/chanc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.904"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.525" />
+        app:layout_constraintHorizontal_bias="0.396"
+        app:layout_constraintStart_toEndOf="@+id/boardFasc"
+        app:layout_constraintTop_toBottomOf="@+id/president"
+        app:layout_constraintVertical_bias="0.052" />
 
     <TextView
         android:id="@+id/messages"
@@ -223,20 +230,20 @@
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.904"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.897" />
+        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintStart_toEndOf="@+id/player5"
+        app:layout_constraintTop_toBottomOf="@+id/textView14"
+        app:layout_constraintVertical_bias="0.488" />
 
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="280dp"
+        android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:text="@string/election_tracker"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.904"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.613" />
+        app:layout_constraintHorizontal_bias="0.395"
+        app:layout_constraintStart_toEndOf="@+id/boardFasc"
+        app:layout_constraintTop_toBottomOf="@+id/chanc"
+        app:layout_constraintVertical_bias="0.07" />
 </androidx.constraintlayout.widget.ConstraintLayout>
